@@ -1,0 +1,24 @@
+\begin{titlepage}
+    \newgeometry{margin=1in}
+    \linespread{1.75}
+    \begin{center}
+        \large
+        {\Huge\textbf{\thesistitle}}
+        \ifdefined\ARCTHIRDCOPY
+            \vfill By \vfill
+            \textbf{\MakeUppercase{\myname}} \\ ID: \mystdid \\ Session: \mysession
+            \vfill \raisebox{-.5\height}{\includegraphics[height=5cm]{cu-logo}} \vfill
+            {\itshape\Large Under Supervision of} \\
+            {\textbf{\supervisorname}} \vfill
+        \else
+            \vfill \raisebox{-.5\height}{\includegraphics[height=8cm]{cu-logo}} \vfill
+        \fi
+        A thesis submitted in conformity with the requirements for the degree of \textbf{\itshape \mydegree}
+        \vfill Department of {\textbf{\deptname \\
+        \institutename}} \vfill
+        \noindent\rule{\textwidth}{1pt} \\
+        Copyright \copyright \ Department of \\
+        \textbf{\deptname, \institutename} \\ \mydate
+    \end{center}
+    \restoregeometry
+\end{titlepage}

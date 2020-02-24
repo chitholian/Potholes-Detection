@@ -1,0 +1,50 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\input{preamble}
+\begin{document}
+\pagenumbering{roman}
+
+\input{titlepage}
+\ifthenelse{\isundefined{\ARCTHIRDCOPY}}{
+    \input{codedpage}
+}
+\clearpage
+
+ \chapter*{\centering{Abstract}}
+ \phantomsection\addcontentsline{toc}{chapter}{Abstract}
+ \input{abstract}
+
+ \tableofcontents
+ \listoffigures
+ \listoftables
+ 
+\clearpage
+\ifdefined\ARCTHIRDCOPY
+    \input{thirdcopy}
+\fi
+
+\begin{chapters}
+    \input{chap-01}
+    \input{chap-02}
+    \input{chap-03}
+    \input{chap-04}
+    \input{chap-05}
+    \input{chap-06}
+\end{chapters}
+
+% \setglossarystyle{altlist}
+\printnoidxglossary
+\printnoidxglossary[type=\acronymtype]
+
+\clearpage
+\begin{appendices}
+    \input{appendices}
+\end{appendices}
+
+\clearpage
+\renewcommand\bibname{\centerline{Bibliography}}
+\phantomsection\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{ieeetr}
+\bibliography{references.bib}
+
+\end{document}

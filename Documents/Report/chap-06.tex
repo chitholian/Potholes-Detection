@@ -1,0 +1,27 @@
+\chapter{Conclusion and Future Works}
+    In this chapter we are going to conclude our research work. Appearance of a brief overview about what to be done in future regarding this research is also shown in this chapter.
+    
+    \section{Conclusion}
+        Although many research in the field of pothole detection have already taken place there are some limitations and problems with existing solutions. We have proposed a method for real-time pothole detection and localization as well as tracking the potholes in the video frames coming from a camera module. We have used 665 images annotated the regions of interest to prepare dataset. \acrfull{ssd} MobileNet, a deep-convolutional neural network designed by Google-researchers for object detection was used as a pre-trained model. We have fine tuned the model with our dataset and used TensorFlow \acrshort{api} for this purpose. Finally, we deployed our model to an android application which is an out-of-the-box usable application for pothole detection and localization in real-time.
+    
+    \section{Future Works}
+        Despite working and building a robust, fast, cost-effective model for pothole detection and localization in real-time, we realize that we need more research-work to make the proposed system more intelligent and error-free. Currently, like other technical systems, our proposed system also has some limitations and drawbacks. In future, we will try to solve the problems.
+        
+        Our model was trained using a small dataset which is a drawback because, the more data we train on, the more accurate the model would be.
+        
+        \subsection{Use Larger Dataset}
+            In future, we will collect and prepare a larger dataset to train our model. This will make our detector model more robust, more accurate, more error-free and more intelligent.
+            
+        \subsection{Measure the Depth of Pothole}
+            Our current proposed system cannot measure how deep the detected pothole is. This is an important feature though. We will try to implement this feature in future.
+            
+        \subsection{Calculate the Area of Pothole}
+            Currently, our proposed system is not configured to measure the area of the detected potholes. This will be very helpful if implemented.
+            We will try to do it in near future.
+            
+        \subsection{Measure the Severity of Pothole}
+            Measuring the severity of the detected pothole is an important task. Our currently proposed model cannot do that. We will implement this strategy in upcoming days. 
+            
+        \subsection{Identify Safe Direction}
+            It will be a great advancement if it could be determined which direction does not have any pothole or possibly safe to move through.
+            We have an idea to implement this feature in the near future.

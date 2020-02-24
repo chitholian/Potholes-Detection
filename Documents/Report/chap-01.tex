@@ -1,0 +1,111 @@
+\chapter{Introduction}
+
+This chapter shows the context of the research work. It illustrates the background and effects of potholes along with stating the motivation. It also highlights the challenges, research objectives and contributions performed by the author of this report. Scopes and limitations of the research has also been discussed in this chapter. Finally it concludes with an overall outline of the whole content of this thesis report.
+
+\section{Motivations Behind the Research}
+    \Gls{pothole} is a very common sight in damaged roads. Due to pothole lots of people suffer. They make huge trouble against normal transportation and movement.
+    Vehicles are seriously affected by potholes. Around 25 percent of roads under the \acrfull{rhd} of Bangladesh are in ``poor, bad or very bad'' condition\cite{dailystarjul19}.
+    
+    Pothole is also a cause of road-accident. In India, more than 9300 people were killed and around 25000 were injured due to accidents as a result of potholes within 3 years\cite{indiatodayjul18}.
+    Moreover, pothole is a terrible problem for visually impaired people. There are more than 2.2 billion people who are visually impaired\cite{whooct19}.
+    So, pothole needs to be detected in real-time and avoided on the way.
+    
+    \clearpage
+    We need a convenient and cost-effective system which can be used for the purpose of pothole detection. The system should also make alarm or notify instantly whenever a pothole is detected.
+    
+    Our target is to build such a system which can be used with an android phone or as an embedded system to detect potholes using a video camera.
+    
+\section{Problem Statement}
+    The problems faced by people due to potholes is almost well known to all. Specially for blind people, an ease of use system needs to be developed so that they can effort it. The system can be deployed like an android application which will use its built-in camera module to capture videos.
+    The video frames of the road then can be processed to detect potholes in it and if found an alarm e.g. an audio signal can be produced. Thus the visually impaired person will get benefit from it and they will be able to avoid potholes on the road.
+    
+    Moreover, the same technique can be used in case of automated vehicle driving.
+    The real-time capability to detect and localize potholes in video frames will help automated car-driver to avoid them.
+    
+\section{Research Objectives}
+    We have made a list of objectives to be fulfilled by this research---
+    \begin{enumerate}
+        \item{To make an annotated dataset of images having potholes.}
+        \item{To build a deep-learning model for detection and localization of potholes.}
+        \item{Deploying the model to an android application so that it can be easily used by the visually impaired people while navigating.}
+        \item{Generating a continuous audio signal as long as at least a single pothole is detected in the video frame coming from the camera of the device being used.}
+    \end{enumerate}
+    
+\section{Research Questions}
+    The research questions of this thesis were identified as follows---
+    \begin{enumerate}
+        \item{Why do potholes need to be detected in real-time ?}
+        \item{What techniques can be used to detect potholes ?}
+        \item{Why using neural network as a technique of pothole detection ?}
+        \item{What measurements were used to evaluate performance of the system ?}
+        \item{How well the system developed performs ?}
+        \item{Who will be benefited from this research ?}
+        \item{How can the technique be deployed to end-users and systems ?}
+    \end{enumerate}
+    
+\section{Scopes of the Research}
+    There are numerous fields where neural network can be utilized but in this research detection and localization of potholes were focused. An annotated dataset of images was prepared which can be reused. We collected these images from online resources as well as by capturing with an android phone having camera support from the damaged roads of the campus of {\itshape University of Chittagong}.
+    
+    Our training strategy followed a transfer-learning scheme where a pre-trained model was fine-tuned with our dataset.
+    Our evaluation of the model includes various metrics, calculations, graphs and charts. We have deployed our detector model to an android application which can be used out-of-the-box for pothole detection and localization. The android application generates continuous audio signal as long as it finds pothole in the frame coming from the device camera.
+    
+\section{Research Contributions}
+    This thesis represents a study of techniques how neural network can be used for detection and localization through transfer-learning. Several contributions are included in this research---
+    \begin{itemize}
+        \item{In our research we have prepared a fully annotated reusable potholes' image dataset where regions of interest are selected with bounding-boxes in each image.}
+        \item{We have built a model for pothole detection and localization which can be used as a base model while doing transfer-learning for similar tasks.}
+        \item{We created such a source-code using python programming language that can be reused for other object detection and localization purpose.}
+        \item{We have built an android application usable out-of-the-box which can detect and localize potholes as well as notify the detection.}
+    \end{itemize}
+    
+\section{Background Research}
+    Before start working for this research we have met some visually impaired people who were residential-students at Shah Amanat Hall of the University of Chittagong. We asked them how trouble they face due to potholes while navigating and what could be done to reduce there sufferings. They suggested us to work on various arenas. Among them we chose the part of pothole detection for them.
+    
+    % \clearpage
+    Here is a portion of questions we asked them along with their answers---
+    \begin{enumerate}
+        \item{Q: What type of potholes are most dangerous for you ? \\
+        A: Deeper potholes.}
+        
+        \item{Q: Which potholes cause more trouble. \\
+        A: Wider potholes.}
+        
+        \item{Q: Before how much distance from a pothole should you be warned ?\\
+        A: Minimum 3 feet ahead.}
+        
+        \item{Q: If you walk speeder then ?\\
+        A: 4--5 feet ahead.}
+        
+        \item{Q: For slow movement ?\\
+        A: 1-2 feet ahead.}
+        
+        \item{Q: What kind of alert do you prefer ?\\
+        A: Voice alert or beep.}
+        
+        \item{Q: What kind of additional instructions do you expect ?\\
+        A: The system should tell us which direction does not have any pothole or safe to move through.}
+    \end{enumerate}
+    
+\section{Methodology in Brief}
+    For our research we took \acrfull{ssd} MobileNet as a base pre-trained model for object detection. Then we fine tuned this model with our dataset. During this process we used our modified configuration of the original model to train-up, validate and measure performance of the desired model. We used Microsoft \acrfull{coco} metrics for analysis of model performance.
+    
+    It is worth mentioning that we have collected our dataset from online resources and also capturing photo-shot by ourselves. These images were annotated with \gls{labelimg} to select regions of interests as bounding-boxes.
+    
+    The whole training and validation process have been performed on Google Colaboratory using TensorFlow \acrshort{api} in Python programming language. Finally, the output model was converted to \gls{tflite} format and deployed to an android application.
+    
+\section{Organization of the Report}
+    This thesis report is arranged in six main chapters and their outline is as follows---
+    
+    \vspace{3mm}\textbf{Chapter No. 1:} Introduction chapter describing motivations, problems, objectives, research questions, scopes and limitations, contributions and background of the research.
+    
+    \vspace{3mm}\textbf{Chapter No. 2:} Background of pothole detection, related works in this field and overview of existing works along with their limitations have been discussed in this chapter.
+    
+    \vspace{3mm}\textbf{Chapter No. 3:} In this chapter we have presented the details about the materials and methodologies used for this research. The techniques of object detection, brief concepts of tools used, metrics, algorithms, evaluation measures etc. have also been discussed.
+    
+    \vspace{3mm}\textbf{Chapter No. 4:} Implementation of the technique used for pothole detection have thoroughly been discussed in this chapter. Also an overall result of the experiment have been shown.
+    
+    \vspace{3mm}\textbf{Chapter No. 5:} Here, a summary of the results was represented along with evaluation of the performance of our model with respect to different measurement parameters. Also Comparison and analysis of the results have been visualized in this chapter.
+    
+    \vspace{3mm}\textbf{Chapter No. 6:} This chapter presents a conclusion to the literature of the whole research work. A brief idea of future works has also been introduced in this chapter.
+    
+    \vspace{15mm} Finally, this report ends with the appendices of additional resources followed by the references to the resources used.

@@ -1,0 +1,116 @@
+\chapter{Sample Codes}
+    \section{Python Code to Split Dataset}\label{A.1}
+        \begin{minted}[mathescape]{python}
+import json, os, fnmatch, random
+
+DATASET_PATH = "dataset"
+TEST_RATIO = 0.2
+all_xmls = fnmatch.filter(os.listdir(DATASET_PATH), '*.xml')
+total_size = len(all_xmls)
+test_set = set()
+train_set = set()
+while len(test_set) < round(total_size * TEST_RATIO):
+    test_set.add(all_xmls[random.randint(0, total_size - 1)])
+for xml in all_xmls:
+    if xml not in test_set:
+        train_set.add(xml)
+with open(os.path.join(DATASET_PATH, 'splits.json'), 'w') as f:
+    json.dump({'train': list(train_set), 'test': list(test_set)}, f)
+    print(f'Splits written to "{f.name}"')
+        \end{minted}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
+    \section{Python Code to Create tfrecord}\label{A.2}
+        \begin{minted}[mathescape]{python}
+import xml.etree.ElementTree as ET
+import tensorflow as tf
+
+LABELS = ['pothole']
+FORCE_RECREATE = False
+
+with open('annotations/labels.pbtxt', 'w') as f:
+    for i in range(len(LABELS)):
+        f.write(f'''\
+item {{
+    id: {i + 1}
+    name: "{LABELS[i]}"
+}}
+''')
+
+def class_text_to_int(class_name):
+    try:
+        return LABELS.index(class_name) + 1
+    except:
+        return None
+
+def create_tfrecord(xml_files, output_file):
+    writer = tf.python_io.TFRecordWriter(output_file)
+
+    for xml_file in xml_files:
+        tree = ET.parse(os.path.join(DATASET_PATH, xml_file))
+        root = tree.getroot()
+
+        width = int(root.find('size/width').text)
+        height = int(root.find('size/height').text)
+        filename = root.find('filename').text.encode('utf8')
+        image_format = root.find('filename').text.split('.')[-1]. \
+          encode('utf8')
+
+        with tf.gfile.GFile(os.path.join(DATASET_PATH, root. \
+            find('filename').text), 'rb') as fid:
+            encoded_img = fid.read()
+
+        class_names = []
+        class_ids = []
+        xmins = []
+        ymins = []
+        xmaxs= []
+        ymaxs = []
+        truncated = []
+        difficulties = []
+
+        for m in root.iter('object'):
+            class_names.append(m.find('name').text.encode('utf8'))
+            class_ids.append(int(class_text_to_int(m.find('name'). \
+                                                   text)))
+            xmins.append(int(m.find('bndbox/xmin').text) / width)
+            ymins.append(int(m.find('bndbox/ymin').text) / height)
+            xmaxs.append(int(m.find('bndbox/xmax').text) / width)
+            ymaxs.append(int(m.find('bndbox/ymax').text) / height)
+            truncated.append(int(m.find('truncated').text))
+            difficulties.append(int(m.find('difficult').text))
+
+        tf_example = tf.train.Example(features=tf.train.Features(
+            feature={
+            'image/height': tf.train.Feature(int64_list=tf.train. \
+               Int64List(value=[height])),
+            'image/width': tf.train.Feature(int64_list=tf.train. \
+               Int64List(value=[width])),
+            'image/filename': tf.train.Feature(bytes_list=tf.train. \
+               BytesList(value=[filename])),
+            'image/source_id': tf.train.Feature(bytes_list=tf.train. \
+               BytesList(value=[filename])),
+            'image/encoded': tf.train.Feature(bytes_list=tf.train. \
+               BytesList(value=[encoded_img])),
+            'image/format': tf.train.Feature(bytes_list=tf.train. \
+               BytesList(value=[image_format])),
+            'image/object/bbox/xmin': tf.train.Feature(float_list= \
+               tf.train.FloatList(value=xmins)),
+            'image/object/bbox/xmax': tf.train.Feature(float_list= \
+               tf.train.FloatList(value=xmaxs)),
+            'image/object/bbox/ymin': tf.train.Feature(float_list= \
+               tf.train.FloatList(value=ymins)),
+            'image/object/bbox/ymax': tf.train.Feature(float_list= \
+               tf.train.FloatList(value=ymaxs)),
+            'image/object/class/text': tf.train.Feature(bytes_list= \
+               tf.train.BytesList(value=class_names)),
+            'image/object/class/label': tf.train.Feature(int64_list= \
+               tf.train.Int64List(value=class_ids)),
+            'image/object/truncated': tf.train.Feature(int64_list= \
+               tf.train.Int64List(value=truncated)),
+            'image/object/difficult': tf.train.Feature(int64_list= \
+               tf.train.Int64List(value=difficulties))
+        }))
+        writer.write(tf_example.SerializeToString())
+    writer.close()
+        \end{minted}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

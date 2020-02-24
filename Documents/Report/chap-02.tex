@@ -1,0 +1,104 @@
+\chapter{Background and Literature Review}
+
+Backgrounds of pothole detection, related works regarding this field and a brief overview of existing works along with their limitations will be laid out in this chapter.
+
+\section{Background}
+    The world population is rising. To support the rising population for quick transportation, number of roads is also rising. But the roads are not always as good as expected. They get damaged due to various reasons. Pothole is a common result of road-damage. Pothole can be defined as---
+    
+    ``A pothole is a kind of depression in a road surface, usually asphalt pavement, where traffic has removed broken pieces of the pavement''\cite{wiki:potholes}.
+    
+    Some of the causes of potholes on the roads are as follows\cite{wiki:potholes}---
+    \begin{enumerate}
+        \item {Insufficient pavement thickness to support traffic during the period of freezing or thawing without localized failures.}
+        \item{Insufficient drainage system.}
+        \item{Failures at utility trenches and castings for example, manhole and drain casings.}
+        \item{Unmaintained and unsealed pavement defects and cracks so as to admit moisture and compromise the structural integrity of the pavement.}
+    \end{enumerate}
+    
+    \clearpage
+    
+    Because, potholes cause serious damage to vehicles, they have to be avoided while driving. Bad road conditions are the cause of about one-third of all traffic related fatalities. Every year, potholes on the roads cost millions of dollars’ worth in damages to cars and in personal injury related medical expenses. Big potholes can cause impairment to even the toughest vehicles\cite{romanjul19}.
+
+    A survey which was conducted by \acrfull{aaa} has uncovered that about 30 million drivers across the United States suffer bad enough pothole damage to require costly repairs. Such repairs generally cost about three billion dollars annually. Drivers typically pay anywhere from \$250 to \$1000 per accident due to potholes\cite{romanjul19}.
+    
+    Potholes are not only dangerous to drivers, but also others like pedestrians and cyclists. Potholes often cause drivers to lose control over their vehicles which may result in a crash. Sometimes potholes cause drivers to swerve to avoid it, but most of the drivers instead end up crashing into another car\cite{romanjul19}.
+    
+    While blind people walks, pothole is one of the most dangerous problem for them. Even a person having enough power of sight can get stumbled into a pothole. Therefore, blind people are more prone to get stumbled. Due to this, they may get seriously injured. Even bone fracture may happen.
+    
+    To reduce the risk of these accidents, many research have taken place in the field of pothole detection. Researchers proposed various techniques and systems for pothole detection and avoidance. Some uses sensor based system to collect road status along with the locations. Then the collected information is used to inform about the upcoming pothole on the road. Some uses image based solutions, some use video based solutions which are similar to image based solutions. Also techniques using machine learning models have been proposed.
+    
+\clearpage
+\section{Vibration-Based Pothole Detection}
+    In this method, an accelerometer is used for detecting potholes. Real-time processing and systems having less storage use the vibration based techniques. For developing the system, preliminary evaluations of pavement-condition\cite{yu06} use hardware that can capture recent data. The desolation of pavement due to potholes enforces force-impact on the vehicle.
+    
+    Pavement surface conditions can be estimated from the recorded response of a test vehicle or car\cite{kim14}. many advantages can be listed for this system such as cost-effectiveness, requires small storage and also can process data in real-time\cite{kim14}.
+    
+    Mednis et al. proposed such a mobile sensing system for road\cite{rao16} which was able to detect inconsistency with the help of a smartphone based on Android Operating System\cite{mednis11,rao16}. They took a 4.4 km long track for the testing purpose with 10 consecutive laps. Using real-world data, their method presented around 90\% \acrfull{tpr}\cite{kim14}.
+    
+    \vspace{8mm}
+    This method could result in wrong information for the cases such as---
+    \begin{itemize}
+        \item {It detects hinges as well as joints of the road\cite{kim14} as pothole event if it is not the case though.}
+        \item{It fails to detect potholes which are in the middle of the lane.}
+    \end{itemize}
+    
+\section{3D Reconstruction Methods}
+    This technique can be classified into 3 different categories---
+    \begin{enumerate}
+        \item {3D Laser Technique}
+        \item{Stereo Vision Technique}
+        \item{Kinect Sensor Technique}
+    \end{enumerate}
+    
+    \subsection{3D Laser Techniques}
+        Reflected laser pulses is used to create a digital model of the target object in this method\cite{akagic17,danti12}. Taking help from grid-based processing approach\cite{kim14}, during canning and focusing on the distress features, the accurate 3D cloud points are captured. The amount of materials needed to fill the potholes could be calculated accurately with this method.
+        
+        \vspace{8mm}
+        Chang et al. showed that scanning as well as extracted focusing on some particular distress features were captured along with accurate 3D cloud points with their elevation by means of a grid-based approach\cite{chang05}. Severity and coverage of the distress could be accurately and automatically calculated using this method\cite{chang05,kim14}.
+        
+        \vspace{8mm}
+        Li et al. presented an inspection system\cite{li09} which can be used to detect and identify distress features like potholes, shoving and rutting with the help of a 3D transverse scanning technique\cite{li09} and it is a high-speed technology. The technique mentioned uses infrared waves featured laser line projector with a digital camera for detecting distress features as well as potholes\cite{li09}. 
+        
+    \subsection{Stereo Vision Techniques}
+        High computational effort and power is required in this method to reconstruct pavement surfaces\cite{Salari2012PavementDE}. It cannot be used in real-time environments and necessary to align both cameras because without proper alignment it will directly affect the outcome-quality in case of vehicle motion and vibration.
+        
+        It uses two digital cameras\cite{wang04} that covers a whole pavement surface. Three steps is followed in this method. Firstly, they captures images of the same region using two cameras directed from different angles. Then they analyze the images and classify distress features and cracks. Finally, they combines two images to reconstruct the 3D view of the pavement which helps to increase accuracy by counting missed cracks.
+        
+    \subsection{Kinect Sensor Techniques}
+        Kinect sensor is used to collect the depth images of pavements and roads which is used to find the volume of a pothole\cite{akagic17}. Using a low cost kinect-sensor, images of roads made with concrete and asphalt can be captured and for better visualization, mesh can be generated. The volume of the pothole can be calculated using trapezoidal rule. Here, area-depth curve is helpful.
+        
+        \vspace{8mm}
+        Joubert et al.\cite{buza2013stereo} proposed a low-cost sensor system using kinect sensor and high speed \acrshort{usb} camera\cite{buza2013stereo} to detect and analyze potholes. Some experiments have already taken palce on using Kinect to examine potholes. This method is cost-effective which is a plus-point.
+        
+\section{Vision-Based Pothole Detection}
+    Vision-based pothole detection techniques can be divided into two categories---
+    \begin{enumerate}
+        \item {2D Image-Based Techniques}
+        \item{Video-Based Techniques}
+    \end{enumerate}
+    
+    \subsection{2D Image-Based Techniques}
+        Images are segmented into defected and non-defected regions for using in this approach\cite{akagic17,koch11,kim14}. The shape of a pothole from the detected region can be determined using the graphic characteristics of the faulted regions.
+        
+        \vspace{8mm}
+        Buza et al.\cite{buza2013stereo} proposed an unsupervised method using computer vision which does not require expensive equipment, filtering or training phases\cite{buza2013stereo,ryu2015image}. They used general image processing and clustering technologies for detecting and identifying potholes in the target image\cite{kim14}.
+        
+        \clearpage
+        Their method consists of three steps as given below---
+        \begin{enumerate}
+            \item {Segmentation of Target Images}
+            \item{Shape and Feature Extraction}
+            \item{Detection and Identification}
+        \end{enumerate}
+        Using the method stated above they reached an accuracy of 81\%\cite{kim14} and it could be used as a rough estimation for pothole-repairs.
+        
+    \subsection{Video-Based Techniques}
+        Lokeshwor et al.\cite{huidrom2013method} proposed a method which could detect potholes, cracks and patches of pavement by analyzing video frames. Using \acrshort{dfs} algorithm\cite{huidrom2013method,kim14}, they segmented video clips undoubtedly into two frames namely, stressed and distressed categories.
+        
+        \vspace{8mm}
+        Jog et al.\cite{jog2012pothole} showed a system for 2D recognition and 3D reconstruction\cite{jog2012pothole} to detect and measure potholes along with their severity. They used video camera seated on the car to capture video of pavements.
+        
+        They were able to find the depth, width and number of potholes using this approach.
+        
+        \vspace{8mm}
+        Koch and Brilakis\cite{koch2013pothole} proposed a method which was bound to single frame of the video coming form camera. It could not find the magnitude of potholes analyzing the frames of pavement video-frames\cite{kim14}. Koch et al. showed an updated composition signature for perfect pavement regions for pothole recognition. They also applied computer vision for tracking detected potholes in the all video frames\cite{koch2013pothole}.

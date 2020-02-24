@@ -1,0 +1,71 @@
+\newcommand*{\ARCTHIRDCOPY}{}
+\newcommand{\thesistitle}{Real-Time Pothole Detection Using MobileNet}
+\newcommand{\myname}{Atikur Rahman}
+\newcommand{\mystdid}{16701016}
+\newcommand{\mysession}{2015\textendash 2016}
+\newcommand{\mydegree}{Bachelor of Science in Engineering}
+\newcommand{\mydate}{February 2020}
+\newcommand{\supervisorname}{Dr. Rashed Mustafa}
+\newcommand{\supdesignation}{Associate Professor}
+\newcommand{\deptname}{Computer Science and Engineering}
+\newcommand{\institutename}{University of Chittagong}
+
+\usepackage{graphicx}
+\usepackage[bindingoffset=1cm]{geometry}
+\usepackage[hidelinks,pagebackref]{hyperref}
+\usepackage{float}
+\restylefloat{table}
+
+\usepackage{minted}
+\usepackage{titlesec}
+\usepackage[toc,acronym]{glossaries}
+\makenoidxglossaries
+\linespread{1.3}
+\renewcommand*{\backrefalt}[4]{%
+    \ifcase #1 %
+        No citation.%
+        \or
+        \(\rightarrow\) Page #2%
+    \else
+        \(\rightarrow\) Pages #2%
+    \fi
+}
+\newenvironment{chapters}{
+    \clearpage
+    \pagenumbering{arabic}
+    \titleformat{\chapter}[display]{\bfseries\LARGE}
+    {\filleft\MakeUppercase{Chapter  \thechapter}}
+    {0pt}{
+        \titlerule[2pt]
+        \vspace{2pt}
+        \titlerule
+        \vspace{2mm}
+    }[
+        \vspace{2mm}
+        \titlerule
+    ]
+}{}
+
+\newenvironment{appendices}{
+    \titleformat{\chapter}[display]{\bfseries\LARGE}
+    {\filright\MakeUppercase{APPENDIX \thechapter}}
+    {0pt}{
+        \titlerule[2pt]
+        \vspace{2pt}
+        \titlerule
+        \filleft
+        \vspace{2mm}
+    }[
+        \vspace{2mm}
+        \titlerule
+    ]
+    \appendix
+}{}
+
+\title{\thesistitle}
+\author{\myname}
+\date{\mydate}
+
+\graphicspath{{images/}}
+
+\input{glossaries}
