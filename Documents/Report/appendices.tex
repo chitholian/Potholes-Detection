@@ -1,5 +1,73 @@
+\chapter{Annotation File Formats}
+    \section{Pascal VOC Format Annotation}\label{app:af_voc}
+        \begin{minted}[mathescape]{html}
+<annotation>
+	<folder>dataset</folder>
+	<filename>img-449.jpg</filename>
+	<path>/CSE-800/Thesis/2020-01-23/dataset/img-449.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>557</width>
+		<height>300</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>pothole</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>166</xmin>
+			<ymin>28</ymin>
+			<xmax>339</xmax>
+			<ymax>123</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>pothole</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>457</xmin>
+			<ymin>44</ymin>
+			<xmax>557</xmax>
+			<ymax>101</ymax>
+		</bndbox>
+	</object>
+</annotation>
+\end{minted}
+    \section{Yolo Format Annotation}\label{app:af_yolo}
+        \begin{minted}[mathescape]{js}
+0 0.643443 0.815000 0.259563 0.203333
+0 0.655738 0.495000 0.207650 0.090000
+0 0.756831 0.391667 0.180328 0.050000
+0 0.769126 0.316667 0.122951 0.040000
+0 0.692623 0.286667 0.106557 0.033333
+0 0.646175 0.260000 0.095628 0.026667
+0 0.713115 0.220000 0.065574 0.026667
+0 0.441257 0.413333 0.122951 0.046667
+0 0.445355 0.370000 0.087432 0.040000
+0 0.539617 0.318333 0.073770 0.030000
+0 0.389344 0.330000 0.090164 0.033333
+0 0.337432 0.371667 0.062842 0.030000
+0 0.083333 0.750000 0.133880 0.113333
+\end{minted}
+        \vfill
+        Notes---
+        \begin{itemize}
+         \item A single file represents a single image.
+         \item One line represents one pothole.
+         \item Line starting with 1 (One) means truncated object.
+         \item Line starting with 0 (Zero) means object not-truncated.
+        \end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Sample Codes}
-    \section{Python Code to Split Dataset}\label{A.1}
+    \section{Python Code to Split Dataset}\label{app:ds_split}
         \begin{minted}[mathescape]{python}
 import json, os, fnmatch, random
 
@@ -19,7 +87,7 @@ with open(os.path.join(DATASET_PATH, 'splits.json'), 'w') as f:
     print(f'Splits written to "{f.name}"')
         \end{minted}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
-    \section{Python Code to Create tfrecord}\label{A.2}
+    \section{Python Code to Create tfrecord}\label{app:mk_tfrecord}
         \begin{minted}[mathescape]{python}
 import xml.etree.ElementTree as ET
 import tensorflow as tf
@@ -44,21 +112,17 @@ def class_text_to_int(class_name):
 
 def create_tfrecord(xml_files, output_file):
     writer = tf.python_io.TFRecordWriter(output_file)
-
     for xml_file in xml_files:
         tree = ET.parse(os.path.join(DATASET_PATH, xml_file))
         root = tree.getroot()
-
         width = int(root.find('size/width').text)
         height = int(root.find('size/height').text)
         filename = root.find('filename').text.encode('utf8')
         image_format = root.find('filename').text.split('.')[-1]. \
           encode('utf8')
-
         with tf.gfile.GFile(os.path.join(DATASET_PATH, root. \
             find('filename').text), 'rb') as fid:
             encoded_img = fid.read()
-
         class_names = []
         class_ids = []
         xmins = []
@@ -67,18 +131,17 @@ def create_tfrecord(xml_files, output_file):
         ymaxs = []
         truncated = []
         difficulties = []
-
         for m in root.iter('object'):
             class_names.append(m.find('name').text.encode('utf8'))
             class_ids.append(int(class_text_to_int(m.find('name'). \
                                                    text)))
+                                                   
             xmins.append(int(m.find('bndbox/xmin').text) / width)
             ymins.append(int(m.find('bndbox/ymin').text) / height)
             xmaxs.append(int(m.find('bndbox/xmax').text) / width)
             ymaxs.append(int(m.find('bndbox/ymax').text) / height)
             truncated.append(int(m.find('truncated').text))
             difficulties.append(int(m.find('difficult').text))
-
         tf_example = tf.train.Example(features=tf.train.Features(
             feature={
             'image/height': tf.train.Feature(int64_list=tf.train. \

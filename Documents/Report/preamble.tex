@@ -1,4 +1,4 @@
-\newcommand*{\ARCTHIRDCOPY}{}
+% \newcommand*{\ARCTHIRDCOPY}{}
 \newcommand{\thesistitle}{Real-Time Pothole Detection Using MobileNet}
 \newcommand{\myname}{Atikur Rahman}
 \newcommand{\mystdid}{16701016}
@@ -16,6 +16,7 @@
 \usepackage{float}
 \restylefloat{table}
 
+\usepackage{pgfplots}
 \usepackage{minted}
 \usepackage{titlesec}
 \usepackage[toc,acronym]{glossaries}
@@ -46,7 +47,9 @@
     ]
 }{}
 
+
 \newenvironment{appendices}{
+    \linespread{1}
     \titleformat{\chapter}[display]{\bfseries\LARGE}
     {\filright\MakeUppercase{APPENDIX \thechapter}}
     {0pt}{
