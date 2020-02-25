@@ -1,13 +1,13 @@
 \chapter{Experimental Procedure}
-    This chapter explains how we prepared tools and devices for the purpose of experiments for our research work. We have used different third-party tools and frameworks, cloud-services like storages and runtime-machines. Finally, deployment of the trained model to android is also discussed here.
+    This chapter explains how we prepared tools and devices for the purpose of experiments for our research work. We have used different third-party tools and frameworks, cloud-services like storages and runtime-machines. Finally, deployment of the trained model to android is discussed here.
         
     \section{Prepare Google Colaboratory}
         We have run the whole experiment in the cloud machines of Google. Their platform ``Colaboratory'' provides access to cloud \acrshort{gpu}s which can accelerate the training process of neural networks.
     
     \section{Preparing the Dataset}
-        We have downloaded 380 web-scraped unique images with potholes from \href{https://kaggle.com}{\itshape{kaggle.com}} and more 285 images we have captured using an android-phone. This is shown in table \ref{tab:img_sources} and visualized in figure \ref{fig:image_sources}.
+        We have downloaded 380 web-scraped unique images with potholes from the online platform \href{https://kaggle.com}{\itshape{kaggle.com}} and more 285 images we have captured using an android-phone. This is shown in table \ref{tab:img_sources} and visualized in figure \ref{fig:image_sources}.
         
-        \begin{table}[h]
+        \begin{table}[ht]
             \centering
             \begin{tabular}{|c|c|c|} \hline
                 Image Source &  Number of Images & Percentage \\\hline\hline
@@ -26,10 +26,10 @@
         \end{figure}
         
         \clearpage
-        \subsection{Annotating the Regions of Interests}
-            For detection of objects and things in images, in case of supervised learning, the regions of interests have to be annotated using bounding-boxes or image-segmentation with masking so that the training process can be accomplished.
+        \subsection{Annotating the Regions of Interest}
+            For detection of objects and things in images, in case of supervised learning, the regions of interest have to be annotated using bounding-boxes or image-segmentation with masking so that the training process can be accomplished.
             
-            We have used \gls{labelimg} to select the regions of interests. This tool can generate \acrfull{xml} format file having the annotation details for each image.
+            We have used \gls{labelimg} to select the regions of interest. This tool can generate \acrfull{xml} format file having the annotation details for each image.
         
             \begin{figure}[h]
                 \centering
@@ -62,23 +62,23 @@
             This partitioning was followed by random splitting. The code we used to do this task is given in Appendix \ref{app:ds_split}.
             
         \subsection{Creating tfrecord Files}
-            \gls{tensorflow} Object Detection \acrshort{api} uses \gls{tfrecord} file format bundling all the dataset-images along with their regions of interest and class-labels. Therefore, we can feed the tfrecord generated from our dataset. We created two separate tfrecord files-- one for training dataset and another for validation dataset.
+            \gls{tensorflow} Object Detection \acrshort{api} uses \gls{tfrecord} file format bundling all the dataset-images along with their regions of interest and class-labels\cite{bisong2019tensorflow}. Therefore, we can feed the tfrecord generated from our dataset. We created two separate tfrecord files--- one for training dataset and another for validation dataset.
             
             Python Code to create \gls{tfrecord} files is given in Appendix \ref{app:mk_tfrecord}.
             
     \section{Preparing a Pre-Trained Model}
-        We have followed transfer learning approach in this research experiment. So, we required a pre-trained model ready to be used as a base model. There are many pre-trained models trained on different datasets with different metrics. These pre-trained models can be found in \gls{tensorflow} Model Zoo.
+        We have followed transfer learning approach\cite{pan2009survey} in this research experiment. So, we required a pre-trained model ready to be used as a base model. There are many pre-trained models trained on different datasets with different metrics. These pre-trained models can be found in \gls{tensorflow}\cite{dillon2017tensorflow} Model Zoo\cite{tf_model_zoo}.
         
-        We have used the \acrshort{ssd} \gls{mobilenet} V2 pre-trained model which was trained on Microsoft \acrshort{coco} dataset.
+        We have used the \acrshort{ssd}\cite{liu2016ssd} \gls{mobilenet}\cite{howard2017mobilenets} V2 pre-trained model which was trained on Microsoft \acrshort{coco} dataset\cite{lin2014microsoft}.
         
         \subsection{Fine-Tune Configuration}
-            Every pre-trained model in the \gls{tensorflow} Model Zoo contains a ``pipeline.config'' file which is used as a configuration file during training and evaluation. We have removed/changed/added several configuration options in that file. Our changes is shown in table \ref{tab:fine_tuned_conf}.
+            Every pre-trained model in the \gls{tensorflow} Model Zoo\cite{tf_model_zoo} contains a ``pipeline.config'' file which is used as a configuration file during training and evaluation. We have removed/changed/added several configuration options in that file. Our changes is shown in table \ref{tab:fine_tuned_conf}.
             
             Example of some options the configuration file consists are---
             \begin{itemize}
-                \item {Number of classes/labels}
+                \item {Number of classes or labels}
                 \item {Activation Functions}
-                \item {Prepossessing Data Augmentation Options}
+                \item {Prepossessing and Data Augmentation Options}
                 \item {Learning Rate and Batch Size}
                 \item {Evaluation Methods}
             \end{itemize}
@@ -101,17 +101,16 @@
                 \label{tab:fine_tuned_conf}
             \end{table}
     \section{Prepare TensorFlow Models Repository}
-        For the purpose of training as well as validation of our model we reused the existing libraries, packages and codes from the \gls{tensorflow} ``models'' repository. The repository contains almost everything we need for training and evaluation using \gls{tensorflow} \acrshort{api}. The mentioned repository can found in Github.
+        For the purpose of training as well as validation of our model we reused the existing libraries, packages and codes from the \gls{tensorflow} ``models'' repository. The repository contains almost everything we need for training and evaluation using \gls{tensorflow} \acrshort{api}. The mentioned repository can found in Github\cite{tf_models_repo}.
         
     \section{Launch Tensorboard}
-        \gls{tensorboard} is a web-interface which can be used to monitor and visualize the results and performance of the model. It is worth mentioning that the \gls{tensorflow} ``models'' repository provides the tools for training and evaluation of models which, if used, saves the parameters, hyper-parameters, scalars and results of model evaluation in ``tfevent'' files. \gls{tensorboard} uses these files and shows the contents graphically in a web-interface.
+        \gls{tensorboard} is a web-interface which can be used to monitor and visualize the results and performance of the model\cite{manetensorboard}. It is worth mentioning that the \gls{tensorflow} ``models'' repository provides the tools for training and evaluation of models which, if used, saves the parameters, hyper-parameters, scalars and results of model evaluation in ``tfevent'' files\cite{tf_models_repo}. \gls{tensorboard} uses these files and shows the contents graphically in a web-interface\cite{manetensorboard}.
         
     \section{Run Training Process}
-        \gls{tensorflow} ``models'' repository provides necessary python code for the whole training process. It also saves the checkpoints of the model in training at a regular interval of time. It starts training from the saved checkpoints if the process is interrupted. It saves the scalar and graphical values i.e. the results of training and evaluation in ``tfevent'' files which can be monitored in \gls{tensorboard}.
+        \gls{tensorflow} ``models'' repository provides necessary python code for the whole training process. It also saves the checkpoints of the model in training at a regular interval of time. It starts training from the saved checkpoints if the process is interrupted\cite{tf_models_repo}. It saves the scalar and graphical values i.e. the results of training and evaluation in ``tfevent'' files which can be monitored in \gls{tensorboard}.
         
     \section{Run Evaluation Process}
-        After the training process ends, we can run the evaluation on the validation dataset. \gls{tensorflow} ``models'' repository provides the tools for the evaluation process too. The evaluation is triggered by the training tool automatically whenever it saves a checkpoint of the model. This helps to monitor the performance of the model at different level of training steps and epochs.    
-     
+        After the training process ends, we can run the evaluation on the validation dataset. \gls{tensorflow} ``models'' repository provides the tools for the evaluation process too. The evaluation is triggered by the training tool automatically whenever it saves a checkpoint of the model\cite{tf_models_repo}. This helps to monitor the performance of the model at different level of training steps and epochs.
             
     \begin{figure}[h]
         \centering
@@ -119,4 +118,3 @@
         \caption{Visualizing and Monitoring the Model and Progress in Tensorboard}
         \label{fig:tb_ui}
     \end{figure}
-    

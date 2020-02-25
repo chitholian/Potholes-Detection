@@ -87,11 +87,11 @@ This chapter shows the context of the research work. It illustrates the backgrou
     \end{enumerate}
     
 \section{Methodology in Brief}
-    For our research we took \acrfull{ssd} \gls{mobilenet} as a base pre-trained model for object detection. Then we fine tuned this model with our dataset. During this process we used our modified configuration of the original model to train-up, validate and measure performance of the desired model. We used Microsoft \acrfull{coco} metrics for analysis of model performance.
+    For our research we took \acrfull{ssd} \gls{mobilenet}\cite{liu2016ssd, howard2017mobilenets} as a base pre-trained model for object detection. Then we fine tuned this model with our dataset. During this process we used our modified configuration of the original model to train-up, validate and measure performance of the desired model. We used Microsoft \acrfull{coco} metrics\cite{lin2014microsoft} for analysis of model performance.
     
-    It is worth mentioning that we have collected our dataset from online resources and also capturing photo-shot by ourselves. These images were annotated with \gls{labelimg} to select regions of interests as bounding-boxes.
+    It is worth mentioning that we have collected our dataset from online resources and also capturing photo-shot by ourselves. These images were annotated with \gls{labelimg}\cite{tzutalingit} to select regions of interests as bounding-boxes.
     
-    The whole training and validation process have been performed on Google Colaboratory using TensorFlow \acrshort{api} in Python programming language. Finally, the output model was converted to \gls{tflite} format and deployed to an android application.
+    The whole training and validation process have been performed on Google Colaboratory using TensorFlow\cite{dillon2017tensorflow} \acrshort{api} in Python programming language. Finally, the output model was converted to \gls{tflite} format and deployed to an android application.
     
 \section{Organization of the Report}
     This thesis report is arranged in six main chapters and their outline is as follows---
@@ -108,4 +108,4 @@ This chapter shows the context of the research work. It illustrates the backgrou
     
     \vspace{3mm}\textbf{Chapter No. 6:} This chapter presents a conclusion to the literature of the whole research work. A brief idea of future works has also been introduced in this chapter.
     
-    \vspace{15mm} Finally, this report ends with the appendices of additional resources followed by the references to the resources used.
+    \vspace{5mm} Finally, this report ends with the appendices of additional resources followed by the references to the resources used.
