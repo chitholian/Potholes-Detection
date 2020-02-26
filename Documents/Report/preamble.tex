@@ -10,9 +10,9 @@
 \newcommand{\deptname}{Computer Science and Engineering}
 \newcommand{\institutename}{University of Chittagong}
 
+\usepackage[a-2b]{pdfx}
 \usepackage{graphicx}
 \usepackage[bindingoffset=1cm]{geometry}
-\usepackage[hidelinks,pagebackref]{hyperref}
 \usepackage{floatrow}
 \floatsetup[table]{capposition=top}
 
@@ -22,20 +22,17 @@
 \usepackage[toc,acronym]{glossaries}
 \makenoidxglossaries
 \linespread{1.3}
-\renewcommand*{\backrefalt}[4]{%
-    \ifcase #1 %
-        No citation.%
-        \or
-        \(\rightarrow\) Page #2%
-    \else
-        \(\rightarrow\) Pages #2%
-    \fi
+\hypersetup{
+    bookmarksnumbered=true,
+    allbordercolors=white,
+    citebordercolor=green
 }
+
 \newenvironment{chapters}{
     \clearpage
     \pagenumbering{arabic}
     \titleformat{\chapter}[display]{\bfseries\LARGE}
-    {\filleft\MakeUppercase{Chapter  \thechapter}}
+    {\filleft\MakeUppercase{Chapter \thechapter}}
     {0pt}{
         \titlerule[2pt]
         \vspace{2pt}
