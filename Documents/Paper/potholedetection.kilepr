@@ -1,0 +1,37 @@
+[General]
+bib_extensions=.bib
+bibliographyBackendAutoDetected=
+bibliographyBackendUserOverride=
+def_graphic_ext=eps
+img_extIsRegExp=false
+img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif
+kileprversion=3
+kileversion=2.9.92
+masterDocument=
+name=Pothole Detection
+pkg_extIsRegExp=false
+pkg_extensions=.cls .sty .bbx .cbx .lbx
+src_extIsRegExp=false
+src_extensions=.tex .ltx .latex .dtx .ins
+
+[Tools]
+MakeIndex=
+QuickBuild=
+
+[item:main.tex]
+archive=true
+encoding=UTF-8
+highlight=LaTeX
+mode=LaTeX
+
+[item:potholedetection.kilepr]
+archive=true
+encoding=UTF-8
+highlight=None
+mode=Normal
+
+[item:references.bib]
+archive=true
+encoding=UTF-8
+highlight=BibTeX
+mode=BibTeX
